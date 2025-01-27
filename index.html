@@ -1,184 +1,292 @@
----
-layout: default
-title: Teckfortune
----
-
-<!-- Custom Maroon Color Overrides for Cayman Theme + Animations -->
-<style>
-  /* 
-    Page Layout / Body
-    - Subtle gradient background
-    - Fade-in animation on load
-  */
-  body {
-    background: linear-gradient(to bottom right, #fffafa, #ffe4e1); /* Subtle pinkish gradient */
-    color: #3f000f; /* Dark maroon-ish text */
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    margin: 0;
-    padding: 2rem;
-    max-width: 900px;
-    margin-left: auto;
-    margin-right: auto;
-    animation: fadeIn 1s ease-in forwards;
-  }
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Teckfortune – Single Page</title>
+  <!-- Basic resets + smooth scrolling -->
+  <style>
+    /* Global resets */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-    to {
-      opacity: 1;
-      transform: translateY(0);
+
+    /* Smooth scrolling for in-page anchor links */
+    html {
+      scroll-behavior: smooth;
     }
-  }
 
-  /* Headings */
-  h1, h2, h3, h4, h5, h6 {
-    color: #800000; /* Maroon for headings */
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-  }
-
-  /* Links - subtle underline animation on hover */
-  a {
-    color: #800000;
-    text-decoration: none;
-    position: relative;
-    transition: color 0.2s ease-in-out;
-  }
-
-  a::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -2px;
-    width: 0;
-    height: 1px;
-    background-color: #800000;
-    transition: width 0.2s ease-in-out;
-  }
-
-  a:hover {
-    text-decoration: none; /* We’ll use our custom underline instead */
-    color: #a52a2a;
-  }
-
-  a:hover::after {
-    width: 100%;
-  }
-
-  /* Section Dividers (Optional styling) */
-  hr {
-    border: 0;
-    border-top: 1px solid #800000;
-    margin: 2rem 0;
-  }
-
-  /* Staggered fade-in for list items */
-  ul li {
-    opacity: 0; /* start hidden */
-    animation: fadeInUp 0.6s forwards;
-  }
-  ul li:nth-child(1) { animation-delay: 0.1s; }
-  ul li:nth-child(2) { animation-delay: 0.2s; }
-  ul li:nth-child(3) { animation-delay: 0.3s; }
-  ul li:nth-child(4) { animation-delay: 0.4s; }
-  ul li:nth-child(5) { animation-delay: 0.5s; }
-
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(15px);
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: #3f000f; /* Dark maroon-ish text */
+      background-color: #fffafa; /* Slight off-white with red tint */
     }
-    to {
-      opacity: 1;
-      transform: translateY(0);
+
+    /* 1) Hero Header with background image */
+    header {
+      position: relative;
+      width: 100%;
+      height: 50vh; /* hero height, adjust as needed */
+      background: url('assets/images/hero-bg.jpg') center/cover no-repeat;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #fff;
     }
-  }
 
-  /* Make lists more spaced out */
-  ul {
-    margin-left: 1.5rem;
-    margin-bottom: 2rem;
-  }
-</style>
+    /* Optional overlay to darken the hero image slightly */
+    header::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 1;
+    }
 
-<!-- Main Content -->
-<h1>Teckfortune</h1>
-<p>
-  Welcome to <strong>Teckfortune's</strong> official site. This serves as the central hub for our projects, documentation, 
-  and collaborative efforts.
-</p>
-<hr />
+    /* Header content above the overlay */
+    .header-content {
+      position: relative;
+      z-index: 2;
+    }
 
-<h2>About Us</h2>
-<p>
-  Teckfortune is a leading technical consulting firm specializing in delivering innovative solutions across various 
-  industries. Established in <strong>[Year]</strong>, we are committed to empowering businesses through cutting-edge 
-  technology and strategic insights.
-</p>
-<hr />
+    .header-logo {
+      height: 80px; /* placeholder size */
+      margin-bottom: 1rem;
+      /* border: 2px solid #fff;  if you want a border around logo placeholder */
+    }
 
-<h2>Our Services</h2>
-<p>We offer a comprehensive suite of services designed to meet the diverse needs of our clients.</p>
+    h1.site-title {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      color: #fff;
+    }
 
-<h3>Technology Consulting</h3>
-<ul>
-  <li><strong>IT Strategy &amp; Planning</strong>: Crafting strategic IT roadmaps aligned with your business objectives.</li>
-  <li><strong>Digital Transformation</strong>: Guiding organizations through the adoption of digital technologies to enhance
-      operations and customer experiences.</li>
-  <li><strong>Cybersecurity &amp; Risk Management</strong>: Implementing robust security measures to protect your data and 
-      ensure compliance.</li>
-</ul>
+    /* 2) Sticky Navigation Bar */
+    nav {
+      position: sticky;
+      top: 0;
+      background-color: #800000; /* maroon background */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 1rem;
+      z-index: 3; /* on top of content */
+    }
 
-<h3>Systems Integration</h3>
-<ul>
-  <li><strong>Enterprise Application Integration</strong>: Seamlessly connecting disparate systems to optimize workflows.</li>
-  <li><strong>Cloud Services</strong>: Assisting in the migration, deployment, and management of cloud-based solutions.</li>
-  <li><strong>Data Analytics &amp; Business Intelligence</strong>: Leveraging data to provide actionable insights for informed 
-      decision-making.</li>
-</ul>
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.2s ease;
+    }
+    nav a:hover {
+      color: #ffc0cb; /* lighter pinkish hover */
+    }
 
-<h3>Managed IT Services</h3>
-<ul>
-  <li><strong>Infrastructure Management</strong>: Providing responsive and scalable IT infrastructure solutions.</li>
-  <li><strong>IT Support &amp; Maintenance</strong>: Offering ongoing support to ensure system reliability and performance.</li>
-  <li><strong>Business Continuity Planning</strong>: Developing strategies to maintain operations during unforeseen 
-      disruptions.</li>
-</ul>
-<hr />
+    /* 3) Section Styles */
+    section {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      opacity: 0; /* for fade-in effect */
+      animation: fadeInUp 0.8s forwards;
+    }
+    /* Stagger the animation delay so each section fades in as you scroll */
+    section:nth-of-type(1) {
+      animation-delay: 0.2s;
+    }
+    section:nth-of-type(2) {
+      animation-delay: 0.4s;
+    }
+    section:nth-of-type(3) {
+      animation-delay: 0.6s;
+    }
+    section:nth-of-type(4) {
+      animation-delay: 0.8s;
+    }
+    section:nth-of-type(5) {
+      animation-delay: 1.0s;
+    }
 
-<h2>Industries We Serve</h2>
-<p>Our expertise spans multiple industries, including:</p>
-<ul>
-  <li><strong>Financial Services</strong>: Enhancing security and efficiency in banking and finance.</li>
-  <li><strong>Healthcare</strong>: Implementing technology solutions to improve patient care and data management.</li>
-  <li><strong>Manufacturing</strong>: Streamlining operations through advanced automation and analytics.</li>
-  <li><strong>Retail</strong>: Elevating customer experiences with innovative e-commerce and in-store solutions.</li>
-  <li><strong>Energy</strong>: Optimizing resource management with smart technology applications.</li>
-</ul>
-<hr />
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
-<h2>Our Values</h2>
-<p>At Teckfortune, we are guided by core values that define our approach:</p>
-<ul>
-  <li><strong>Innovation</strong>: Continuously seeking creative solutions to drive progress.</li>
-  <li><strong>Integrity</strong>: Upholding honesty and transparency in all our dealings.</li>
-  <li><strong>Excellence</strong>: Committing to the highest standards in service delivery.</li>
-  <li><strong>Collaboration</strong>: Fostering partnerships with clients and within our team to achieve shared goals.</li>
-</ul>
-<hr />
+    h2 {
+      color: #800000; /* maroon color for subheadings */
+      margin-bottom: 0.75rem;
+    }
 
-<h2>Contact Us</h2>
-<p>
-  We value collaboration and are eager to connect with you. For inquiries or more information, please reach out to us:
-</p>
-<ul>
-  <li><strong>Phone</strong>: [Your Phone Number]</li>
-  <li><strong>Email</strong>: [Your Email Address]</li>
-  <li><strong>Website</strong>: [Your Website URL]</li>
-</ul>
-<hr />
+    hr {
+      border: 0;
+      border-top: 1px solid #800000;
+      margin: 1.5rem 0;
+    }
 
-<p><em>Note: For detailed information, please visit our official website or contact us directly.</em></p>
+    /* Common styling for lists */
+    ul {
+      margin-left: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    li {
+      margin: 0.5rem 0;
+    }
+
+    /* Footer styling (if you want a simple footer) */
+    footer {
+      text-align: center;
+      padding: 1rem;
+      color: #aaa;
+    }
+
+    /* Media Queries (optional example) */
+    @media (max-width: 600px) {
+      .header-logo {
+        height: 60px;
+      }
+      h1.site-title {
+        font-size: 1.5rem;
+      }
+      nav {
+        flex-wrap: wrap;
+        gap: 0.75rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO HEADER -->
+  <header>
+    <div class="header-content">
+      <!-- Logo placeholder -->
+      <img 
+        src="assets/images/logo.png" 
+        alt="Teckfortune Logo"
+        class="header-logo"
+        onerror="this.onerror=null; this.src='https://via.placeholder.com/150?text=Your+Logo';"
+      />
+      <h1 class="site-title">Teckfortune</h1>
+      <p>Innovation | Integrity | Excellence</p>
+    </div>
+  </header>
+
+  <!-- STICKY NAV -->
+  <nav>
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#industries">Industries</a>
+    <a href="#values">Values</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <!-- SINGLE PAGE SECTIONS -->
+
+  <!-- ABOUT SECTION -->
+  <section id="about">
+    <h2>About Us</h2>
+    <p>
+      Teckfortune is a leading technical consulting firm specializing in delivering
+      innovative solutions across various industries. Established in <strong>[Year]</strong>,
+      we are committed to empowering businesses through cutting-edge technology and
+      strategic insights.
+    </p>
+    <hr>
+  </section>
+
+  <!-- SERVICES SECTION -->
+  <section id="services">
+    <h2>Our Services</h2>
+    <p>We offer a comprehensive suite of services designed to meet the diverse needs of our clients.</p>
+
+    <h3>Technology Consulting</h3>
+    <ul>
+      <li><strong>IT Strategy &amp; Planning</strong>: Crafting strategic IT roadmaps aligned with your business objectives.</li>
+      <li><strong>Digital Transformation</strong>: Guiding organizations through the adoption of digital technologies to enhance
+          operations and customer experiences.</li>
+      <li><strong>Cybersecurity &amp; Risk Management</strong>: Implementing robust security measures to protect your data and 
+          ensure compliance.</li>
+    </ul>
+
+    <h3>Systems Integration</h3>
+    <ul>
+      <li><strong>Enterprise Application Integration</strong>: Seamlessly connecting disparate systems to optimize workflows.</li>
+      <li><strong>Cloud Services</strong>: Assisting in the migration, deployment, and management of cloud-based solutions.</li>
+      <li><strong>Data Analytics &amp; Business Intelligence</strong>: Leveraging data to provide actionable insights for informed 
+          decision-making.</li>
+    </ul>
+
+    <h3>Managed IT Services</h3>
+    <ul>
+      <li><strong>Infrastructure Management</strong>: Providing responsive and scalable IT infrastructure solutions.</li>
+      <li><strong>IT Support &amp; Maintenance</strong>: Offering ongoing support to ensure system reliability and performance.</li>
+      <li><strong>Business Continuity Planning</strong>: Developing strategies to maintain operations during unforeseen 
+          disruptions.</li>
+    </ul>
+    <hr>
+  </section>
+
+  <!-- INDUSTRIES SECTION -->
+  <section id="industries">
+    <h2>Industries We Serve</h2>
+    <p>Our expertise spans multiple industries, including:</p>
+    <ul>
+      <li><strong>Financial Services</strong>: Enhancing security and efficiency in banking and finance.</li>
+      <li><strong>Healthcare</strong>: Implementing technology solutions to improve patient care and data management.</li>
+      <li><strong>Manufacturing</strong>: Streamlining operations through advanced automation and analytics.</li>
+      <li><strong>Retail</strong>: Elevating customer experiences with innovative e-commerce and in-store solutions.</li>
+      <li><strong>Energy</strong>: Optimizing resource management with smart technology applications.</li>
+    </ul>
+    <hr>
+  </section>
+
+  <!-- VALUES SECTION -->
+  <section id="values">
+    <h2>Our Values</h2>
+    <p>At Teckfortune, we are guided by core values that define our approach:</p>
+    <ul>
+      <li><strong>Innovation</strong>: Continuously seeking creative solutions to drive progress.</li>
+      <li><strong>Integrity</strong>: Upholding honesty and transparency in all our dealings.</li>
+      <li><strong>Excellence</strong>: Committing to the highest standards in service delivery.</li>
+      <li><strong>Collaboration</strong>: Fostering partnerships with clients and within our team to achieve shared goals.</li>
+    </ul>
+    <hr>
+  </section>
+
+  <!-- CONTACT SECTION -->
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <p>
+      We value collaboration and are eager to connect with you. For inquiries or more information, please reach out to us:
+    </p>
+    <ul>
+      <li><strong>Phone</strong>: + 1 813 904 5712</li>
+      <li><strong>Email</strong>: info@teckfortune.com</li>
+      <li><strong>Website</strong>: teckfortune.com</li>
+    </ul>
+    <hr>
+    <p><em>Note: For detailed information, please visit our official website or contact us directly.</em></p>
+  </section>
+
+  <!-- FOOTER (optional) -->
+  <footer>
+    &copy; <span id="year"></span> Teckfortune. All rights reserved.
+  </footer>
+
+  <!-- Tiny script to set the current year in the footer -->
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
