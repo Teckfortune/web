@@ -1,4 +1,4 @@
-theme: cayman
+theme: theme: jekyll-theme-cayman
 title: Teckfortune Inc
 description: Leading Technical Consulting Firm
 remote_theme: pages-themes/cayman@v0.2.0
