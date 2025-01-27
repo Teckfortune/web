@@ -3,32 +3,69 @@ layout: default
 title: Teckfortune
 ---
 
-<!-- Custom Maroon Color Overrides for Cayman Theme -->
+<!-- Custom Maroon Color Overrides for Cayman Theme + Animations -->
 <style>
-  /* Page Body */
+  /* 
+    Page Layout / Body
+    - Subtle gradient background
+    - Fade-in animation on load
+  */
   body {
-    background-color: #fffafa; /* Slight off-white with red tint */
-    color: #3f000f;            /* Dark maroon-ish text */
+    background: linear-gradient(to bottom right, #fffafa, #ffe4e1); /* Subtle pinkish gradient */
+    color: #3f000f; /* Dark maroon-ish text */
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     margin: 0;
     padding: 2rem;
     max-width: 900px;
     margin-left: auto;
     margin-right: auto;
+    animation: fadeIn 1s ease-in forwards;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   /* Headings */
   h1, h2, h3, h4, h5, h6 {
     color: #800000; /* Maroon for headings */
+    margin-top: 2rem;
+    margin-bottom: 1rem;
   }
 
-  /* Links */
+  /* Links - subtle underline animation on hover */
   a {
     color: #800000;
     text-decoration: none;
+    position: relative;
+    transition: color 0.2s ease-in-out;
   }
+
+  a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 0;
+    height: 1px;
+    background-color: #800000;
+    transition: width 0.2s ease-in-out;
+  }
+
   a:hover {
-    text-decoration: underline;
+    text-decoration: none; /* We’ll use our custom underline instead */
+    color: #a52a2a;
+  }
+
+  a:hover::after {
+    width: 100%;
   }
 
   /* Section Dividers (Optional styling) */
@@ -36,6 +73,34 @@ title: Teckfortune
     border: 0;
     border-top: 1px solid #800000;
     margin: 2rem 0;
+  }
+
+  /* Staggered fade-in for list items */
+  ul li {
+    opacity: 0; /* start hidden */
+    animation: fadeInUp 0.6s forwards;
+  }
+  ul li:nth-child(1) { animation-delay: 0.1s; }
+  ul li:nth-child(2) { animation-delay: 0.2s; }
+  ul li:nth-child(3) { animation-delay: 0.3s; }
+  ul li:nth-child(4) { animation-delay: 0.4s; }
+  ul li:nth-child(5) { animation-delay: 0.5s; }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(15px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Make lists more spaced out */
+  ul {
+    margin-left: 1.5rem;
+    margin-bottom: 2rem;
   }
 </style>
 
