@@ -58,11 +58,98 @@
       /* border: 2px solid #fff;  if you want a border around logo placeholder */
     }
 
-    h1.site-title {
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
-      color: #fff;
-    }
+
+
+    .logo-container {
+  position: relative;
+}
+.logo-container:before {
+  content: "";
+  position: absolute;
+  top: calc( 100% - 2px );
+  width: 100%;
+  height: 4px;
+  background-color: #cf0000;
+  transform-origin: center center;
+  transform: scaleX(0);
+  -webkit-animation: line-animation 3s ease infinite alternate;
+          animation: line-animation 3s ease infinite alternate;
+}
+.logo-container h1#page-logo {
+  font: bold 6rem "Arial", sans-serif;
+  -webkit-animation: clip-path-reveal-1 3s ease infinite alternate;
+          animation: clip-path-reveal-1 3s ease infinite alternate;
+}
+
+@-webkit-keyframes line-animation {
+  0% {
+    transform: scaleX(0);
+  }
+  15% {
+    transform: scaleX(0);
+  }
+  20%, 25% {
+    transform: scaleX(1);
+    top: calc( 100% - 2px );
+  }
+  50% {
+    transform: scaleX(1);
+    top: 0px;
+  }
+  70% {
+    transform: scaleX(0.2);
+    top: 0px;
+  }
+  80%, 100% {
+    transform: scaleX(0.2);
+    top: 0px;
+  }
+}
+
+@keyframes line-animation {
+  0% {
+    transform: scaleX(0);
+  }
+  15% {
+    transform: scaleX(0);
+  }
+  20%, 25% {
+    transform: scaleX(1);
+    top: calc( 100% - 2px );
+  }
+  50% {
+    transform: scaleX(1);
+    top: 0px;
+  }
+  70% {
+    transform: scaleX(0.2);
+    top: 0px;
+  }
+  80%, 100% {
+    transform: scaleX(0.2);
+    top: 0px;
+  }
+}
+@-webkit-keyframes clip-path-reveal-1 {
+  0%, 25% {
+    -webkit-clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0% 100%);
+            clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0% 100%);
+  }
+  50% {
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+  }
+}
+@keyframes clip-path-reveal-1 {
+  0%, 25% {
+    -webkit-clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0% 100%);
+            clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0% 100%);
+  }
+  50% {
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+  }
+}
 
     /* 2) Sticky Navigation Bar */
     nav {
@@ -155,9 +242,7 @@
       .header-logo {
         height: 60px;
       }
-      h1.site-title {
-        font-size: 1.5rem;
-      }
+
       nav {
         flex-wrap: wrap;
         gap: 0.75rem;
@@ -177,7 +262,9 @@
         class="header-logo"
         onerror="this.onerror=null; this.src='https://via.placeholder.com/150?text=Your+Logo';"
       />
-      <h1 class="site-title">Teckfortune</h1>
+      <div class="logo-container">
+        <h1 id="page-logo">Teckfortune</h1>
+      </div>
       <p>Innovation | Integrity | Excellence</p>
     </div>
   </header>
